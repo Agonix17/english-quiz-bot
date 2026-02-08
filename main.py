@@ -30,10 +30,7 @@ def webhook():
     tg_app.update_queue.put(update)
     return "ok", 200
 
-@flask_app.before_first_request
-def set_webhook():
+if __name__ == "__main__":
     if PUBLIC_URL:
         tg_app.bot.set_webhook(f"{PUBLIC_URL}/webhook/{WEBHOOK_SECRET}")
-
-if __name__ == "__main__":
     flask_app.run(host="0.0.0.0", port=PORT)
